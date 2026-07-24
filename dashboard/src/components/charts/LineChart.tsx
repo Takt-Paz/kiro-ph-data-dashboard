@@ -1,13 +1,3 @@
-/**
- * LineChart Component
- * ====================
- * 
- * Renders a responsive line chart for time-series data.
- * Used for: Cost trends over years, project count evolution.
- * 
- * Good for showing: trends, patterns, and changes over time.
- */
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -44,7 +34,7 @@ export function LineChart({ labels, datasets, formatValue }: LineChartProps) {
       borderColor: ds.color,
       backgroundColor: ds.fill ? ds.color + '20' : 'transparent',
       fill: ds.fill ?? false,
-      tension: 0.3, // smooth curves
+      tension: 0.3,
       pointRadius: 4,
       pointHoverRadius: 6,
     })),

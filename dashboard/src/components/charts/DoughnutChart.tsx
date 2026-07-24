@@ -1,14 +1,3 @@
-/**
- * DoughnutChart Component
- * ========================
- * 
- * Renders a doughnut (donut) chart for proportional data.
- * Used for: Cost distribution by category, work type breakdown.
- * 
- * Best for: showing parts of a whole (percentages, market share).
- * Avoid for: too many categories (>8 slices become unreadable).
- */
-
 import {
   Chart as ChartJS,
   ArcElement,
@@ -20,7 +9,6 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Professional color palette — muted tones for white backgrounds
 const COLORS = [
   '#1f2937', '#4b5563', '#0369a1', '#0f766e',
   '#7c3aed', '#b45309', '#be123c', '#4338ca',
@@ -67,7 +55,7 @@ export function DoughnutChart({ labels, data, formatValue }: DoughnutChartProps)
         },
       },
     },
-    cutout: '55%', // Makes it a doughnut vs pie
+    cutout: '55%',
   };
 
   return (

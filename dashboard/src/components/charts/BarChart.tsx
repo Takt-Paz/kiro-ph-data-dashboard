@@ -1,16 +1,3 @@
-/**
- * BarChart Component
- * ===================
- * 
- * Renders a responsive bar chart using Chart.js + react-chartjs-2.
- * Used for: Projects by Region, Projects by Year, Top Contractors.
- * 
- * Chart.js advantages:
- * - Small bundle size (~60KB gzipped)
- * - Canvas-based rendering (handles thousands of data points)
- * - Built-in animations, tooltips, responsiveness
- */
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,7 +10,6 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-// Register Chart.js components (tree-shakeable)
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface BarChartProps {
@@ -49,7 +35,7 @@ export function BarChart({
       {
         label,
         data,
-        backgroundColor: color + '99', // semi-transparent
+        backgroundColor: color + '99',
         borderColor: color,
         borderWidth: 1,
         borderRadius: 4,

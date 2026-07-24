@@ -1,22 +1,3 @@
-/**
- * Dashboard Filters Component
- * =============================
- * 
- * Provides interactive filter controls that dynamically update SQL queries.
- * 
- * HOW DYNAMIC FILTERS WORK:
- * 1. User selects a filter value (e.g., Region = "Region III")
- * 2. The filter state updates via React setState
- * 3. SQL queries that depend on filters re-execute automatically
- * 4. Charts update with fresh data in ~5-30ms
- * 
- * DATA ENGINEERING INSIGHT:
- * Because DuckDB-WASM runs locally, filter interactions feel instant.
- * There's no network request — just a SQL re-execution against cached Parquet data.
- * This is called "zero-latency interactivity" and it's why client-side analytics
- * creates a dramatically better user experience vs traditional server-based dashboards.
- */
-
 import { useDuckDB } from '../../hooks/useDuckDB';
 
 export interface FilterState {
@@ -32,8 +13,6 @@ interface FiltersProps {
 }
 
 export function Filters({ filters, onChange }: FiltersProps) {
-  // Fetch distinct values for each filter dropdown
-  // These queries run once on mount and populate the dropdown options
   const { data: regions } = useDuckDB<{ region: string }>(`
     SELECT DISTINCT region FROM flood_control ORDER BY region
   `);
@@ -110,7 +89,6 @@ export function Filters({ filters, onChange }: FiltersProps) {
         </select>
       </div>
 
-      {/* Reset button */}
       {(filters.region || filters.year || filters.workType || filters.costCategory) && (
         <button
           className="filter-reset"
@@ -124,14 +102,6 @@ export function Filters({ filters, onChange }: FiltersProps) {
   );
 }
 
-/**
- * Utility: Build a WHERE clause from active filters.
- * Returns empty string if no filters active, or " WHERE ..." clause.
- * 
- * IMPORTANT: In production, use parameterized queries to prevent SQL injection.
- * Since our filter values come from DuckDB itself (not user text input),
- * this is safe for this use case. For free-text inputs, always sanitize.
- */
 export function buildWhereClause(filters: FilterState): string {
   const conditions: string[] = [];
 
