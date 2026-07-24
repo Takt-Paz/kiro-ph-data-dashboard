@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react'
 import { useDuckDB } from './hooks/useDuckDB'
 import { Filters, buildWhereClause, type FilterState } from './components/filters/Filters'
 import { BarChart, LineChart, DoughnutChart } from './components/charts'
-import { QueryTimer } from './components/QueryTimer'
 import { DataTable } from './components/DataTable'
 import { SearchBar } from './components/SearchBar'
 import { ExportButton } from './components/ExportButton'
@@ -100,7 +99,7 @@ function App() {
 
   // ─── Overview Queries ────────────────────────────────────────────────────
 
-  const { data: stats, loading: statsLoading, durationMs: statsDuration } = useDuckDB<SummaryStats>(`
+  const { data: stats, loading: statsLoading } = useDuckDB<SummaryStats>(`
     SELECT 
       CAST(COUNT(*) AS INTEGER) as total_projects,
       ROUND(SUM(contract_cost), 0) as total_cost,
@@ -110,14 +109,14 @@ function App() {
     FROM flood_control${whereClause}
   `, [whereClause]);
 
-  const { data: yearData, durationMs: yearDuration } = useDuckDB<YearRow>(`
+  const { data: yearData } = useDuckDB<YearRow>(`
     SELECT infra_year, CAST(COUNT(*) AS INTEGER) as projects,
       ROUND(SUM(contract_cost), 0) as total_cost
     FROM flood_control${whereClause}${whereClause ? ' AND' : ' WHERE'} infra_year IS NOT NULL
     GROUP BY infra_year ORDER BY infra_year
   `, [whereClause]);
 
-  const { data: workTypeData, durationMs: workTypeDuration } = useDuckDB<WorkTypeRow>(`
+  const { data: workTypeData } = useDuckDB<WorkTypeRow>(`
     SELECT type_of_work, CAST(COUNT(*) AS INTEGER) as projects,
       ROUND(SUM(contract_cost), 0) as total_cost
     FROM flood_control${whereClause}
@@ -133,7 +132,7 @@ function App() {
 
   // ─── Region Queries ──────────────────────────────────────────────────────
 
-  const { data: regionData, durationMs: regionDuration } = useDuckDB<RegionRow>(`
+  const { data: regionData } = useDuckDB<RegionRow>(`
     SELECT region, CAST(COUNT(*) AS INTEGER) as projects,
       ROUND(SUM(contract_cost), 0) as total_cost
     FROM flood_control${whereClause}
@@ -154,7 +153,7 @@ function App() {
 
   // ─── Contractor Queries ──────────────────────────────────────────────────
 
-  const { data: contractorData, durationMs: contractorDuration } = useDuckDB<TopContractorRow>(`
+  const { data: contractorData } = useDuckDB<TopContractorRow>(`
     SELECT contractor, CAST(COUNT(*) AS INTEGER) as projects,
       ROUND(SUM(contract_cost), 0) as total_value
     FROM flood_control${whereClause}
@@ -170,7 +169,7 @@ function App() {
     ORDER BY contract_cost DESC LIMIT 500
   `;
 
-  const { data: explorerData, durationMs: explorerDuration } = useDuckDB<ProjectRow>(
+  const { data: explorerData } = useDuckDB<ProjectRow>(
     explorerSQL, [whereClause, searchClause]
   );
 
@@ -225,7 +224,7 @@ function App() {
                 <span className="kpi-value">{summary.unique_contractors.toLocaleString()}</span>
                 <span className="kpi-label">Contractors</span>
               </div>
-              <QueryTimer durationMs={statsDuration} label="Query" />
+              
             </section>
           )}
 
@@ -233,7 +232,7 @@ function App() {
             <section className="card">
               <div className="card-header">
                 <h2>Projects & Cost by Year</h2>
-                <QueryTimer durationMs={yearDuration} />
+                
               </div>
               {yearData.length > 0 && (
                 <LineChart
@@ -250,7 +249,7 @@ function App() {
             <section className="card">
               <div className="card-header">
                 <h2>By Work Type</h2>
-                <QueryTimer durationMs={workTypeDuration} />
+                
               </div>
               {workTypeData.length > 0 && (
                 <DoughnutChart
@@ -284,7 +283,7 @@ function App() {
             <section className="card">
               <div className="card-header">
                 <h2>All Regions</h2>
-                <QueryTimer durationMs={regionDuration} />
+                
               </div>
               {regionData.length > 0 && (
                 <BarChart
@@ -364,7 +363,7 @@ function App() {
             <div className="card-header">
               <h2>Top 25 Contractors by Project Count</h2>
               <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <QueryTimer durationMs={contractorDuration} />
+                
                 <ExportButton
                   sql={`SELECT contractor, CAST(COUNT(*) AS INTEGER) as projects, ROUND(SUM(contract_cost),0) as total_value FROM flood_control${whereClause} GROUP BY contractor ORDER BY projects DESC LIMIT 100`}
                   filename="contractors_export.csv"
@@ -407,7 +406,7 @@ function App() {
             <div className="card-header">
               <h2>Project Explorer</h2>
               <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <QueryTimer durationMs={explorerDuration} />
+                
                 <ExportButton sql={explorerSQL} filename="projects_export.csv" />
               </div>
             </div>
