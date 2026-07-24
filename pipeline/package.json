@@ -1,0 +1,20 @@
+{
+  "name": "pipeline",
+  "version": "1.0.0",
+  "description": "PH Flood Control Data Engineering Pipeline",
+  "main": "index.js",
+  "scripts": {
+    "pipeline": "node src/pipeline.js",
+    "ingest": "node src/01_ingest.js",
+    "transform": "node src/02_transform.js",
+    "export": "node src/03_export.js",
+    "verify": "node src/04_verify.js"
+  },
+  "keywords": ["data-engineering", "duckdb", "parquet", "pipeline"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "duckdb": "^1.4.4"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-07-24T12:00:58.370Z",
+  "pipeline_version": "1.0.0",
+  "source": "bettergov.ph/flood-control-projects",
+  "files": [
+    {
+      "name": "flood_control_cleaned.parquet",
+      "rows": 9827,
+      "description": "Full cleaned dataset"
+    },
+    {
+      "name": "summary_by_region.parquet",
+      "description": "Aggregated by region"
+    },
+    {
+      "name": "summary_by_work_type.parquet",
+      "description": "Aggregated by work type"
+    },
+    {
+      "name": "summary_by_year.parquet",
+      "description": "Aggregated by infrastructure year"
+    },
+    {
+      "name": "summary_top_contractors.parquet",
+      "description": "Top 100 contractors by project count"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+node_modules
+output/
+*.duckdb
+*.duckdb.wal
+flood_control_projects.geojson

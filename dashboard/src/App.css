@@ -1,0 +1,316 @@
+/* ============================================================================
+   CLEAN WHITE THEME DASHBOARD
+   ============================================================================ */
+
+.dashboard {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dashboard-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.dashboard-header .subtitle {
+  color: #6b7280;
+  font-size: 0.82rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.dashboard-header .subtitle strong {
+  font-weight: 500;
+  color: #374151;
+}
+
+/* ─── Loading State ──────────────────────────────────────────────────────── */
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  gap: 1.25rem;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #111827;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p {
+  color: #374151;
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.loading-detail {
+  color: #9ca3af !important;
+  font-size: 0.78rem !important;
+  font-weight: 400 !important;
+  text-align: center;
+  max-width: 380px;
+  line-height: 1.5;
+}
+
+/* ─── Filters ────────────────────────────────────────────────────────────── */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 160px;
+}
+
+.filter-group label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+}
+
+.filter-group select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  background: #ffffff;
+  color: #1f2937;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  padding-right: 2rem;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: #111827;
+}
+
+.filter-reset {
+  padding: 0.5rem 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.filter-reset:hover {
+  border-color: #111827;
+  color: #111827;
+}
+
+/* ─── KPI Cards ──────────────────────────────────────────────────────────── */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.kpi-grid .query-timer {
+  position: absolute;
+  top: -1.6rem;
+  right: 0;
+}
+
+.kpi-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+
+.kpi-card:hover {
+  border-color: #d1d5db;
+}
+
+.kpi-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.kpi-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── Charts Grid ────────────────────────────────────────────────────────── */
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.charts-grid .card-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.card-header h2 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+/* ─── Query Timer ────────────────────────────────────────────────────────── */
+
+.query-timer {
+  font-size: 0.65rem;
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+  padding: 0.2rem 0.5rem;
+  background: #f9fafb;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.query-timer-label {
+  color: #9ca3af;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+thead {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #f5f5f5;
+  color: #374151;
+}
+
+tr:hover td {
+  background: #fafafa;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+
+.dashboard-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.dashboard-footer p {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.dashboard-footer a {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dashboard-footer a:hover {
+  color: #111827;
+}
